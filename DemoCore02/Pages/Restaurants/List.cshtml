@@ -1,0 +1,48 @@
+﻿@page
+@model DemoCore02.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>Restaurants</h2>
+<a asp-page="./Edit" class="btn btn-primary">New restaurant</a>
+<br />
+<br />
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input asp-for="SerchTerm" type="search" class="form-control" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Cuisine</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var restaurant in Model.Restaurants)
+            {
+                <tr>
+                    <td>@restaurant.Id</td>
+                    <td><a asp-page="Detail" asp-route-restaurantId="@restaurant.Id">@restaurant.Name</a></td>
+                    <td>@restaurant.Location</td>
+                    <td>@restaurant.Cuisine</td>
+                    <td><a asp-page="./Edit" asp-route-restaurantId="@restaurant.Id"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
